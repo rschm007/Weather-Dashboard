@@ -9,6 +9,8 @@
       src="https://kit.fontawesome.com/7652f157a9.js"
       crossorigin="anonymous"
     ></script>
+    <!-- moment.min library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- local JS script -->
@@ -111,21 +113,16 @@
       <div class="col-span-4">
         <div class="border-2 border-gray-400 bg-white ml-0 h-auto mt-5 mx-10">
           <!-- local forecast -->
-          <span class="LocationDate">
-            <h2
-              class="text-black text-3xl text-center font-medium px-4 py-2 mt-2"
-            >
-              Location 00/00/00
-            </h2>
+          <span class="LocationDate text-black text-3xl text-center font-medium px-4 py-2 mt-2">
             <i class="fas fa-clouds weatherIcon"></i>
           </span>
-          <div class="temperature px-4 py-2">Temperature: 90 °F</div>
-          <div class="humidity px-4 py-2">Humidity: 41%</div>
-          <div class="wind px-4 py-2">Wind Speed: 4.7 MPH</div>
-          <div class="uvIndex px-4 py-2 mb-5">
+          <div class="temperature px-4 py-2"></div>
+          <div class="humidity px-4 py-2"></div>
+          <div class="wind px-4 py-2"></div>
+          <div class="px-4 py-2 mb-5">
             UV Index:
-            <span class="text-white bg-red-700 rounded-full px-2 py-1"
-              >9.49</span
+            <span class="uvIndex text-white rounded-full px-2 py-1"
+              ></span
             >
           </div>
         </div>

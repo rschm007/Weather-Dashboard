@@ -1,0 +1,22 @@
+{
+  "name": "weather-dashboard",
+  "version": "1.0.0",
+  "description": "A weather app that uses the OpenWeather API to retrieve weather data for cities",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rschm007/Weather-Dashboard.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rschm007/Weather-Dashboard/issues"
+  },
+  "homepage": "https://github.com/rschm007/Weather-Dashboard#readme",
+  "devDependencies": {
+    "tailwindcss": "^1.9.6"
+  }
+}

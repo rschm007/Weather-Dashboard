@@ -140,112 +140,41 @@ $(document).ready(function () {
       cityName +
       "&appid=876faa7d5be6244a6c4e363606e24ecc";
 
+    // define a function that will take care of appending the DOM with the forecast cards
+    function forecastCards(responseForecast, dayCard, dayDate, dayNumberAdd, iconClass, listNum, dayTemp, dayHumidity) {
+      $(dayCard).append(
+        "<div class='" + dayDate + " text-teal-900 font-medium m-2'></div>"
+      );
+      $("." + dayDate).text(moment().add(dayNumberAdd, "days").format("L"));
+      $(dayCard).append("<img src='' class='" + iconClass + " place-self-center w-20 h-20'></img>");
+      weatherIconDOM("." + iconClass, responseForecast.list[listNum].weather[0].icon);
+      $(dayCard).append("<div class='" + dayTemp + " m-2'></div>");
+      $("." + dayTemp).text(
+        "Temp: " +
+          (Math.round(
+            (responseForecast.list[listNum].main.temp - 273.15) * 1.8 + 32
+          ) +
+            String.fromCharCode(176) +
+            "F")
+      );
+      $(dayCard).append("<div class='" + dayHumidity + " m-2'></div>");
+      $("." + dayHumidity).text(
+        "Humidity: " + responseForecast.list[listNum].main.humidity + "%"
+      );
+    };
+
     // API call for 5 day forecast data
     $.ajax({
       url: queryForecast,
       method: "GET",
     }).then(function (responseForecast) {
       console.log(responseForecast);
-      //   define the DOM card for day +1
-      $(".dayOne").append(
-        "<div class='dayOneDate text-teal-900 font-medium m-2'></div>"
-      );
-      $(".dayOneDate").text(moment().add(1, "days").format("L"));
-      $(".dayOne").append("<img src='' class='dayOneIcon place-self-center w-20 h-20'></img>");
-      weatherIconDOM(".dayOneIcon", responseForecast.list[0].weather[0].icon);
-      $(".dayOne").append("<div class='dayOneTemp m-2'></div>");
-      $(".dayOneTemp").text(
-        "Temp: " +
-          (Math.round(
-            (responseForecast.list[0].main.temp - 273.15) * 1.8 + 32
-          ) +
-            String.fromCharCode(176) +
-            "F")
-      );
-      $(".dayOne").append("<div class='dayOneHumidity m-2'></div>");
-      $(".dayOneHumidity").text(
-        "Humidity: " + responseForecast.list[0].main.humidity + "%"
-      );
-      //   day +2
-      $(".dayTwo").append(
-        "<div class='dayTwoDate text-teal-900 font-medium m-2'></div>"
-      );
-      $(".dayTwoDate").text(moment().add(2, "days").format("L"));
-      $(".dayTwo").append("<img src='' class='dayTwoIcon w-20 h-20'></img>");
-      weatherIconDOM(".dayTwoIcon", responseForecast.list[1].weather[0].icon);
-      $(".dayTwo").append("<div class='dayTwoTemp m-2'></div>");
-      $(".dayTwoTemp").text(
-        "Temp: " +
-          (Math.round(
-            (responseForecast.list[1].main.temp - 273.15) * 1.8 + 32
-          ) +
-            String.fromCharCode(176) +
-            "F")
-      );
-      $(".dayTwo").append("<div class='dayTwoHumidity m-2'></div>");
-      $(".dayTwoHumidity").text(
-        "Humidity: " + responseForecast.list[1].main.humidity + "%"
-      );
-      // day +3
-      $(".dayThree").append(
-        "<div class='dayThreeDate text-teal-900 font-medium m-2'></div>"
-      );
-      $(".dayThreeDate").text(moment().add(3, "days").format("L"));
-      $(".dayThree").append("<img src='' class='dayThreeIcon w-20 h-20'></img>");
-      weatherIconDOM(".dayThreeIcon", responseForecast.list[2].weather[0].icon);
-      $(".dayThree").append("<div class='dayThreeTemp m-2'></div>");
-      $(".dayThreeTemp").text(
-        "Temp: " +
-          (Math.round(
-            (responseForecast.list[2].main.temp - 273.15) * 1.8 + 32
-          ) +
-            String.fromCharCode(176) +
-            "F")
-      );
-      $(".dayThree").append("<div class='dayThreeHumidity m-2'></div>");
-      $(".dayThreeHumidity").text(
-        "Humidity: " + responseForecast.list[2].main.humidity + "%"
-      );
-      // day +4
-      $(".dayFour").append(
-        "<div class='dayFourDate text-teal-900 font-medium m-2'></div>"
-      );
-      $(".dayFourDate").text(moment().add(4, "days").format("L"));
-      $(".dayFour").append("<img src='' class='dayFourIcon w-20 h-20'></img>");
-      weatherIconDOM(".dayFourIcon", responseForecast.list[3].weather[0].icon);
-      $(".dayFour").append("<div class='dayFourTemp m-2'></div>");
-      $(".dayFourTemp").text(
-        "Temp: " +
-          (Math.round(
-            (responseForecast.list[3].main.temp - 273.15) * 1.8 + 32
-          ) +
-            String.fromCharCode(176) +
-            "F")
-      );
-      $(".dayFour").append("<div class='dayFourHumidity m-2'></div>");
-      $(".dayFourHumidity").text(
-        "Humidity: " + responseForecast.list[3].main.humidity + "%"
-      );
-      // day +5
-      $(".dayFive").append(
-        "<div class='dayFiveDate text-teal-900 font-medium m-2'></div>"
-      );
-      $(".dayFiveDate").text(moment().add(5, "days").format("L"));
-      $(".dayFive").append("<img src='' class='dayFiveIcon w-20 h-20'></img>");
-      weatherIconDOM(".dayFiveIcon", responseForecast.list[4].weather[0].icon);
-      $(".dayFive").append("<div class='dayFiveTemp m-2'></div>");
-      $(".dayFiveTemp").text(
-        "Temp: " +
-          (Math.round(
-            (responseForecast.list[4].main.temp - 273.15) * 1.8 + 32
-          ) +
-            String.fromCharCode(176) +
-            "F")
-      );
-      $(".dayFive").append("<div class='dayFiveHumidity m-2'></div>");
-      $(".dayFiveHumidity").text(
-        "Humidity: " + responseForecast.list[4].main.humidity + "%"
-      );
+      //   define the DOM cards by calling forecastCards function
+      forecastCards(responseForecast, ".dayOne", "dayOneDate", 1, "dayOneIcon", 0, "dayOneTemp", "dayOneHumidity");
+      forecastCards(responseForecast, ".dayTwo", "dayTwoDate", 2, "dayTwoIcon", 1, "dayTwoTemp", "dayTwoHumidity");
+      forecastCards(responseForecast, ".dayThree", "dayThreeDate", 3, "dayThreeIcon", 2, "dayThreeTemp", "dayThreeHumidity");
+      forecastCards(responseForecast, ".dayFour", "dayFourDate", 4, "dayFourIcon", 3, "dayFourTemp", "dayFourHumidity");
+      forecastCards(responseForecast, ".dayFive", "dayFiveDate", 5, "dayFiveIcon", 4, "dayFiveTemp", "dayFiveHumidity");
     });
   });
 });

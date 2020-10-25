@@ -39,64 +39,64 @@ $(document).ready(function () {
     $(".wind").text("Wind Speed: " + response.wind.speed + " MPH");
 
     // define a function that changes the weatherIcon in the LocationDate icon
-    function weatherIconDOM(weatherIcon) {
+    function weatherIconDOM(className, iconResponse) {
       // clear sky group
-      if (weatherIcon === "01d") {
-        $(".weatherIcon").attr(
+      if (iconResponse === "01d") {
+        $(className).attr(
           "src",
           "https://cdn0.iconfinder.com/data/icons/weather-filled-outline-6/64/weather_cloud_sun_moon_rain-49-512.png"
         );
         // few clouds group
-      } else if (weatherIcon === "02d") {
-        $(".weatherIcon").attr(
+      } else if (iconResponse === "02d") {
+        $(className).attr(
           "src",
           "https://cdn0.iconfinder.com/data/icons/weather-filled-outline-6/64/weather_cloud_sun_moon_rain-04-512.png"
         );
         // scattered clouds group
-      } else if (weatherIcon === "03d") {
-        $(".weatherIcon").attr(
+      } else if (iconResponse === "03d") {
+        $(className).attr(
           "src",
           "https://cdn0.iconfinder.com/data/icons/weather-filled-outline-6/64/weather_cloud_sun_moon_rain-41-512.png"
         );
         // broken clouds group
-      } else if (weatherIcon === "04d") {
-        $(".weatherIcon").attr(
+      } else if (iconResponse === "04d") {
+        $(className).attr(
           "src",
           "https://cdn0.iconfinder.com/data/icons/weather-filled-outline-6/64/weather_cloud_sun_moon_rain-05-512.png"
         );
         // shower rain group
-      } else if (weatherIcon === "09d") {
-        $(".weatherIcon").attr(
+      } else if (iconResponse === "09d") {
+        $(className).attr(
           "src",
           "https://cdn0.iconfinder.com/data/icons/weather-filled-outline-6/64/weather_cloud_sun_moon_rain-02-512.png"
         );
         // rain group
-      } else if (weatherIcon === "10d") {
-        $(".weatherIcon").attr(
+      } else if (iconResponse === "10d") {
+        $(className).attr(
           "src",
           "https://cdn0.iconfinder.com/data/icons/weather-filled-outline-6/64/weather_cloud_sun_moon_rain-03-512.png"
         );
         // thunderstorm group
-      } else if (weatherIcon === "11d") {
-        $(".weatherIcon").attr(
+      } else if (iconResponse === "11d") {
+        $(className).attr(
           "src",
           "https://www.iconfinder.com/icons/5896932/moon_cloud_sun_weather_rain_icon"
         );
         // snow group
-      } else if (weatherIcon === "13d") {
-        $(".weatherIcon").attr(
+      } else if (iconResponse === "13d") {
+        $(className).attr(
           "src",
           "https://cdn0.iconfinder.com/data/icons/weather-filled-outline-6/64/weather_cloud_sun_moon_rain-21-512.png"
         );
         // mist group
       } else {
-        $(".weatherIcon").attr(
+        $(className).attr(
           "src",
           "https://cdn0.iconfinder.com/data/icons/weather-filled-outline-6/64/weather_cloud_sun_moon_rain-18-512.png"
         );
       }
     }
-    weatherIconDOM(weatherIcon);
+    weatherIconDOM(".weatherIcon", weatherIcon);
 
     // gathering vars for the UV Index ajax call
 
@@ -151,7 +151,8 @@ $(document).ready(function () {
         "<div class='dayOneDate text-teal-900 font-medium m-2'></div>"
       );
       $(".dayOneDate").text(moment().add(1, "days").format("L"));
-      $(".dayOne").append("<img src='' class='dayOneIcon'></img>");
+      $(".dayOne").append("<img src='' class='dayOneIcon place-self-center w-20 h-20'></img>");
+      weatherIconDOM(".dayOneIcon", responseForecast.list[0].weather[0].icon);
       $(".dayOne").append("<div class='dayOneTemp m-2'></div>");
       $(".dayOneTemp").text(
         "Temp: " +
@@ -170,7 +171,8 @@ $(document).ready(function () {
         "<div class='dayTwoDate text-teal-900 font-medium m-2'></div>"
       );
       $(".dayTwoDate").text(moment().add(2, "days").format("L"));
-      $(".dayTwo").append("<img src='' class='dayTwoIcon'></img>");
+      $(".dayTwo").append("<img src='' class='dayTwoIcon w-20 h-20'></img>");
+      weatherIconDOM(".dayTwoIcon", responseForecast.list[1].weather[0].icon);
       $(".dayTwo").append("<div class='dayTwoTemp m-2'></div>");
       $(".dayTwoTemp").text(
         "Temp: " +
@@ -189,7 +191,8 @@ $(document).ready(function () {
         "<div class='dayThreeDate text-teal-900 font-medium m-2'></div>"
       );
       $(".dayThreeDate").text(moment().add(3, "days").format("L"));
-      $(".dayThree").append("<img src='' class='dayThreeIcon'></img>");
+      $(".dayThree").append("<img src='' class='dayThreeIcon w-20 h-20'></img>");
+      weatherIconDOM(".dayThreeIcon", responseForecast.list[2].weather[0].icon);
       $(".dayThree").append("<div class='dayThreeTemp m-2'></div>");
       $(".dayThreeTemp").text(
         "Temp: " +
@@ -208,7 +211,8 @@ $(document).ready(function () {
         "<div class='dayFourDate text-teal-900 font-medium m-2'></div>"
       );
       $(".dayFourDate").text(moment().add(4, "days").format("L"));
-      $(".dayFour").append("<img src='' class='dayFourIcon'></img>");
+      $(".dayFour").append("<img src='' class='dayFourIcon w-20 h-20'></img>");
+      weatherIconDOM(".dayFourIcon", responseForecast.list[3].weather[0].icon);
       $(".dayFour").append("<div class='dayFourTemp m-2'></div>");
       $(".dayFourTemp").text(
         "Temp: " +
@@ -227,7 +231,8 @@ $(document).ready(function () {
         "<div class='dayFiveDate text-teal-900 font-medium m-2'></div>"
       );
       $(".dayFiveDate").text(moment().add(5, "days").format("L"));
-      $(".dayFive").append("<img src='' class='dayFiveIcon'></img>");
+      $(".dayFive").append("<img src='' class='dayFiveIcon w-20 h-20'></img>");
+      weatherIconDOM(".dayFiveIcon", responseForecast.list[4].weather[0].icon);
       $(".dayFive").append("<div class='dayFiveTemp m-2'></div>");
       $(".dayFiveTemp").text(
         "Temp: " +

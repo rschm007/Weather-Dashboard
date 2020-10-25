@@ -6,16 +6,6 @@ $(document).ready(function () {
   // constant for now moment
   const now = moment().format("LL");
 
-  // // button click functions
-  // $("button").on("click", function(event) {
-  //   cityName = $(this).closest('td').find('button').text();
-  //   function reloadPage(){
-  //     location.reload(true);
-  //   }
-  //   reloadPage();
-  //   console.log(cityName);
-  // });
-
   // if the user hits enter in the search form, click the search button
   $(".search").keypress(function (event) {
     if (event.keyCode === 13) {
@@ -28,12 +18,30 @@ $(document).ready(function () {
   $(".searchBtn").on("click", function () {
     event.preventDefault();
 
+    // if there's any forecast cards, empty the cards first
+    if (($(".dayOne").length > 0) && ($(".dayTwo").length > 0) && ($(".dayThree").length > 0) && ($(".dayFour").length > 0) && ($(".dayFive").length > 0)) {
+      $(".dayOne").empty();
+      $(".dayTwo").empty();
+      $(".dayThree").empty();
+      $(".dayFour").empty();
+      $(".dayFive").empty();
+    }
+
     // get the value of the search form from the user
     cityName = $(".search").val();
 
     // make all DOM elements visible
     $(".invisible").addClass("visible").removeClass("invisible");
+
+    // save last search term as prepended table row in the pastSearches table
+    var cityNameSearched = cityName.replace(/\s+/g, '');
     
+    $(".pastSearches").append("<tr class='hover:bg-blue-500 " + cityNameSearched + "Saved'>")
+    $("." + cityNameSearched + "Saved").append("<td class=" + cityNameSearched + "Table border px-4 py-2 text-gray-600 hover:text-white hover:shadow-sm></td>");
+    $("." + cityNameSearched + "Table").append("<button class='ml-2 p-2'></button>");
+    $("." + cityNameSearched + "Table").find("button").text(cityName);
+
+
     // openweather API settings
     const API = "876faa7d5be6244a6c4e363606e24ecc";
     var queryURLWeather =

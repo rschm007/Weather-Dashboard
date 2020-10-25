@@ -1,7 +1,6 @@
 $(document).ready(function () {
   // city stored from search form
   let cityName = $(".search").val();
-  console.log(cityName);
 
   // constant for now moment
   const now = moment().format("LL");
@@ -33,15 +32,20 @@ $(document).ready(function () {
     // make all DOM elements visible
     $(".invisible").addClass("visible").removeClass("invisible");
 
-    // save last search term as prepended table row in the pastSearches table
+    // save last search term as prepended table row in the pastSearches table so we can remove all spaces for class designations
     var cityNameSearched = cityName.replace(/\s+/g, '');
-    
-    $(".pastSearches").append("<tr class='hover:bg-blue-500 " + cityNameSearched + "Saved'>")
-    $("." + cityNameSearched + "Saved").append("<td class=" + cityNameSearched + "Table border px-4 py-2 text-gray-600 hover:text-white hover:shadow-sm></td>");
-    $("." + cityNameSearched + "Table").append("<button class='ml-2 p-2'></button>");
-    $("." + cityNameSearched + "Table").find("button").text(cityName);
+    // defining a variable that checks if the search term already exists
+    var cityNameSearchedExists = document.querySelector("." + cityNameSearched + "Saved");
 
+    // only add the search term to the table if it doesn't exist already
+    if (cityNameSearchedExists == null) {
+      $(".pastSearches").append("<tr class='hover:bg-blue-500 " + cityNameSearched + "Saved'>")
+      $("." + cityNameSearched + "Saved").append("<td class=" + cityNameSearched + "Table border px-4 py-2 text-gray-600 hover:text-white hover:shadow-sm></td>");
+      $("." + cityNameSearched + "Table").append("<button class='ml-2 p-2'></button>");
+      $("." + cityNameSearched + "Table").find("button").text(cityName);
+    }
 
+  // ===================================AJAX calls==========================================
     // openweather API settings
     const API = "876faa7d5be6244a6c4e363606e24ecc";
     var queryURLWeather =
@@ -54,7 +58,6 @@ $(document).ready(function () {
       url: queryURLWeather,
       method: "GET",
     }).then(function (response) {
-      console.log(response);
 
       // add location and date to header DOM
       $(".location").text(cityName);
@@ -156,7 +159,6 @@ $(document).ready(function () {
         url: queryUV,
         method: "GET",
       }).then(function (responseUV) {
-        console.log(responseUV);
         var uvIndexValue = responseUV.value;
         $(".uvIndex").text(uvIndexValue);
         //   define a function that will insert the UV Index DOM object AND change the uvIndex span color according to severity
@@ -227,7 +229,6 @@ $(document).ready(function () {
         url: queryForecast,
         method: "GET",
       }).then(function (responseForecast) {
-        console.log(responseForecast);
         //   define the DOM cards by calling forecastCards function
         forecastCards(
           responseForecast,

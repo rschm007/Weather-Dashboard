@@ -40,81 +40,35 @@
         <form class="focus:shadow-outline">
           <h2 class="block text-2xl font-normal mb-1">Search for a City:</h2>
           <input
-            class="border-2 border-gray-400 bg-white h-10 px-5 pr-16 rounded-lg text-md focus:outline-none"
+            class="search border-2 border-gray-400 bg-white h-10 px-5 pr-16 rounded-lg text-md focus:outline-none"
             type="search"
             name="search"
             placeholder="Search"
           />
-          <button class="fas fa-search hover:curser-pointer"></button>
+          <button class="searchBtn fas fa-search hover:curser-pointer"></button>
         </form>
         <!-- city buttons contained within a table -->
         <table
           class="border-2 border-gray-400 bg-white w-full h-auto ml-0 mt-5 mx-10"
         >
-          <tbody>
+          <tbody class="invisible">
             <tr class="hover:bg-blue-500">
               <td
                 class="border px-4 py-2 text-gray-600 hover:text-white hover:shadow-sm"
               >
-                Austin
-              </td>
-            </tr>
-            <tr class="hover:bg-blue-500">
-              <td
-                class="border px-4 py-2 text-gray-700 hover:text-white hover:shadow-sm"
-              >
-                Chicago
-              </td>
-            </tr>
-            <tr class="hover:bg-blue-500">
-              <td
-                class="border px-4 py-2 text-gray-700 hover:text-white hover:shadow-sm"
-              >
-                New York
-              </td>
-            </tr>
-            <tr class="hover:bg-blue-500">
-              <td
-                class="border px-4 py-2 text-gray-700 hover:text-white hover:shadow-sm"
-              >
-                Orlando
-              </td>
-            </tr>
-            <tr class="hover:bg-blue-500">
-              <td
-                class="border px-4 py-2 text-gray-700 hover:text-white hover:shadow-sm"
-              >
-                San Francisco
-              </td>
-            </tr>
-            <tr class="hover:bg-blue-500">
-              <td
-                class="border px-4 py-2 text-gray-700 hover:text-white hover:shadow-sm"
-              >
-                Seattle
-              </td>
-            </tr>
-            <tr class="hover:bg-blue-500">
-              <td
-                class="border px-4 py-2 text-gray-700 hover:text-white hover:shadow-sm"
-              >
-                Denver
-              </td>
-            </tr>
-            <tr class="hover:bg-blue-500">
-              <td class="border px-4 py-2 text-gray-700 hover:text-white">
-                Atlanta
+                <button></button>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
       <!-- div that contains weather API output for current day -->
-      <div class="col-span-4">
+      <div class="col-span-4 invisible">
         <div class="border-2 border-gray-400 bg-white ml-0 h-auto mt-5 mx-10">
           <!-- local forecast -->
           <div class="grid grid-flow-col auto-cols-max">
-            <span class="LocationDate text-black text-3xl text-center font-medium mx-4 mt-10"></span>
+            <span class="location text-black text-3xl text-center font-medium mx-4 mt-10"></span>
+            <span class="currentDate text-black text-3xl text-center font-medium mx-4 mt-10"></span>
             <img src="" class="weatherIcon ml-3 w-24 h-24 mt-4"></i>
           </div>
           <div class="temperature px-4 py-2"></div>
@@ -128,7 +82,7 @@
           </div>
         </div>
         <!-- div that contains 5-day forecast -->
-        <div class="mt-5">
+        <div class="mt-5 invisible">
           <h2 class="text-2xl">5-Day Forecast</h2>
           <div class="grid grid-flow-row auto-rows-min grid-cols-5 text-lg mt-5 mr-10 gap-2">
             <div class="dayOne col-span-1 bg-teal-200 rounded-lg text-lg h-auto w-auto"></div>

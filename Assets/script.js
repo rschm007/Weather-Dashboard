@@ -5,6 +5,53 @@ $(document).ready(function () {
   // constant for now moment
   const now = moment().format("LL");
 
+  // defining an empty array to hold cityHistory
+  var cityHistory = [];
+
+  initial();
+
+  // define a function to store cityHistory array as localStorage object
+  function storeHistory() {
+    localStorage.setItem("cityHistory", JSON.stringify(cityHistory));
+  }
+
+  function renderHistory() {
+    // if cityHistory array has nothing, return
+    if (cityHistory == null) {
+      return;
+    }
+    // run a for loop to go through cityHistory array and add table rows/buttons
+    let cityNameHistory = [...new Set(cityHistory)];
+    for (let i = 0; i < cityNameHistory.length; i++) {
+      let cityArrayItem = cityNameHistory[i];
+      $(".pastSearches").append(
+        "<tr class='hover:bg-blue-500 " + cityArrayItem + "SearchedSaved'>"
+      );
+      $("." + cityArrayItem + "SearchedSaved").append(
+        "<td class=" +
+          cityArrayItem +
+          "SearchedTable border px-4 py-2 text-gray-600></td>"
+      );
+      $("." + cityArrayItem + "SearchedTable").append(
+        "<button class='" +
+          cityArrayItem +
+          "SearchedButton hover:text-white font-semibold ml-2 p-2'></button>"
+      );
+      $("." + cityArrayItem + "SearchedTable")
+        .find("button")
+        .text(cityArrayItem);
+    }
+  }
+
+  // define a function to pull cityHistory array and fill array and DOM with it
+  function initial() {
+    let savedHistory = JSON.parse(localStorage.getItem("cityHistory"));
+    if (savedHistory !== null) {
+      cityHistory = savedHistory;
+    }
+    renderHistory();
+  }
+
   // if the user hits enter in the search form, click the search button
   $(".search").keypress(function (event) {
     if (event.keyCode === 13) {
@@ -26,40 +73,64 @@ $(document).ready(function () {
     // make all DOM elements visible
     $(".invisible").addClass("visible").removeClass("invisible");
 
-    // save last search term as prepended table row in the pastSearches table so we can remove all spaces for class designations
-    var cityNameSearched = cityName.replace(/\s+/g, '');
-    // defining a variable that checks if the search term already exists
-    var cityNameSearchedExists = document.querySelector("." + cityNameSearched + "Saved");
+    // push all cityNames into array for later retrieval
+    cityHistory.push(cityName);
+    storeHistory();
+    console.log(cityHistory);
 
+    // save last search term as prepended table row in the pastSearches table so we can remove all spaces for class designations
+    var cityNameSearched = cityName.replace(/\s+/g, "");
+    // defining a variable that checks if the search term already exists
+    var cityNameSearchedExists = document.querySelector(
+      "." + cityNameSearched + "Saved"
+    );
     // only add the search term to the table if it doesn't exist already
     if (cityNameSearchedExists == null) {
-      $(".pastSearches").append("<tr class='hover:bg-blue-500 " + cityNameSearched + "Saved'>")
-      $("." + cityNameSearched + "Saved").append("<td class=" + cityNameSearched + "Table border px-4 py-2 text-gray-600></td>");
-      $("." + cityNameSearched + "Table").append("<button class='" + cityNameSearched + "Button hover:text-white font-semibold ml-2 p-2'></button>");
-      $("." + cityNameSearched + "Table").find("button").text(cityName);
+      $(".pastSearches").append(
+        "<tr class='hover:bg-blue-500 " + cityNameSearched + "Saved'>"
+      );
+      $("." + cityNameSearched + "Saved").append(
+        "<td class=" +
+          cityNameSearched +
+          "Table border px-4 py-2 text-gray-600></td>"
+      );
+      $("." + cityNameSearched + "Table").append(
+        "<button class='" +
+          cityNameSearched +
+          "Button hover:text-white font-semibold ml-2 p-2'></button>"
+      );
+      $("." + cityNameSearched + "Table")
+        .find("button")
+        .text(cityName);
     }
+  });
 
-    // define a variable that listens for a button click
-    var cityButton = $("." + cityNameSearched + "Button");
+  // define a variable that listens for a button click
+  var cityButton = $("." + cityNameSearched + "Button");
 
-    // add an event listener that listens for if the user clicks a button in the city table. if user clicks, the cityName should be the button value
-    $(cityButton).on("click", function() {
-      cityName = $(this).text();
-      populateDOM();
-    });
+  // add an event listener that listens for if the user clicks a button in the city table. if user clicks, the cityName should be the button value
+  $(cityButton).on("click", function () {
+    cityName = $(this).text();
+    populateDOM();
+  });
 
   // ===================================AJAX calls==========================================
   function populateDOM() {
-    
     // if there's any forecast cards, empty the cards first
-    if (($(".dayOne").length >= 1) && ($(".dayTwo").length >= 1) && ($(".dayThree").length >= 1) && ($(".dayFour").length >= 1) && ($(".dayFive").length >= 1)) {
+    if (
+      $(".dayOne").length >= 1 &&
+      $(".dayTwo").length >= 1 &&
+      $(".dayThree").length >= 1 &&
+      $(".dayFour").length >= 1 &&
+      $(".dayFive").length >= 1
+    ) {
       $(".dayOne").empty();
       $(".dayTwo").empty();
       $(".dayThree").empty();
       $(".dayFour").empty();
       $(".dayFive").empty();
-    };
-    
+    }
+
     // openweather API settings
     const API = "876faa7d5be6244a6c4e363606e24ecc";
     var queryURLWeather =
@@ -72,7 +143,6 @@ $(document).ready(function () {
       url: queryURLWeather,
       method: "GET",
     }).then(function (response) {
-
       // add location and date to header DOM
       $(".location").text(cityName);
 
@@ -177,8 +247,6 @@ $(document).ready(function () {
         $(".uvIndex").text(uvIndexValue);
         //   define a function that will insert the UV Index DOM object AND change the uvIndex span color according to severity
         function uvIndexSeverity(uvIndexValue) {
-          
-          
           if (uvIndexValue <= 2) {
             $(".uvIndex").addClass("bg-green-500");
           } else if (uvIndexValue >= 3 && uvIndexValue <= 5) {
@@ -296,6 +364,5 @@ $(document).ready(function () {
         );
       });
     });
-  };
-  });
+  }
 });

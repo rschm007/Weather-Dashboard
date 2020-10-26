@@ -17,15 +17,6 @@ $(document).ready(function () {
   $(".searchBtn").on("click", function (event) {
     event.preventDefault();
 
-    // if there's any forecast cards, empty the cards first
-    if (($(".dayOne").length > 0) && ($(".dayTwo").length > 0) && ($(".dayThree").length > 0) && ($(".dayFour").length > 0) && ($(".dayFive").length > 0)) {
-      $(".dayOne").empty();
-      $(".dayTwo").empty();
-      $(".dayThree").empty();
-      $(".dayFour").empty();
-      $(".dayFive").empty();
-    }
-
     // get the value of the search form from the user
     cityName = $(".search").val();
 
@@ -59,6 +50,16 @@ $(document).ready(function () {
 
   // ===================================AJAX calls==========================================
   function populateDOM() {
+    
+    // if there's any forecast cards, empty the cards first
+    if (($(".dayOne").length >= 1) && ($(".dayTwo").length >= 1) && ($(".dayThree").length >= 1) && ($(".dayFour").length >= 1) && ($(".dayFive").length >= 1)) {
+      $(".dayOne").empty();
+      $(".dayTwo").empty();
+      $(".dayThree").empty();
+      $(".dayFour").empty();
+      $(".dayFive").empty();
+    };
+    
     // openweather API settings
     const API = "876faa7d5be6244a6c4e363606e24ecc";
     var queryURLWeather =

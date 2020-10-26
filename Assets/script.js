@@ -14,7 +14,7 @@ $(document).ready(function () {
   });
 
   // when the user clicks the search button, populate the page
-  $(".searchBtn").on("click", function () {
+  $(".searchBtn").on("click", function (event) {
     event.preventDefault();
 
     // if there's any forecast cards, empty the cards first
@@ -29,6 +29,9 @@ $(document).ready(function () {
     // get the value of the search form from the user
     cityName = $(".search").val();
 
+    // call the populateDOM function
+    populateDOM();
+
     // make all DOM elements visible
     $(".invisible").addClass("visible").removeClass("invisible");
 
@@ -41,11 +44,21 @@ $(document).ready(function () {
     if (cityNameSearchedExists == null) {
       $(".pastSearches").append("<tr class='hover:bg-blue-500 " + cityNameSearched + "Saved'>")
       $("." + cityNameSearched + "Saved").append("<td class=" + cityNameSearched + "Table border px-4 py-2 text-gray-600></td>");
-      $("." + cityNameSearched + "Table").append("<button class='hover:text-white font-semibold ml-2 p-2'></button>");
+      $("." + cityNameSearched + "Table").append("<button class='" + cityNameSearched + "Button hover:text-white font-semibold ml-2 p-2'></button>");
       $("." + cityNameSearched + "Table").find("button").text(cityName);
     }
 
+    // define a variable that listens for a button click
+    var cityButton = $("." + cityNameSearched + "Button");
+
+    // add an event listener that listens for if the user clicks a button in the city table. if user clicks, the cityName should be the button value
+    $(cityButton).on("click", function() {
+      cityName = $(this).text();
+      populateDOM();
+    });
+
   // ===================================AJAX calls==========================================
+  function populateDOM() {
     // openweather API settings
     const API = "876faa7d5be6244a6c4e363606e24ecc";
     var queryURLWeather =
@@ -282,5 +295,6 @@ $(document).ready(function () {
         );
       });
     });
+  };
   });
 });

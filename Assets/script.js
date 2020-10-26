@@ -74,7 +74,7 @@ $(document).ready(function () {
     $(".invisible").addClass("visible").removeClass("invisible");
 
     // push all cityNames into array for later retrieval
-    cityHistory.push(cityName);
+    cityHistory.indexOf(cityName) === -1 ? cityHistory.push(cityName) : console.log("this item already exists");
     storeHistory();
     console.log(cityHistory);
 

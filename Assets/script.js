@@ -40,8 +40,8 @@ $(document).ready(function () {
     // only add the search term to the table if it doesn't exist already
     if (cityNameSearchedExists == null) {
       $(".pastSearches").append("<tr class='hover:bg-blue-500 " + cityNameSearched + "Saved'>")
-      $("." + cityNameSearched + "Saved").append("<td class=" + cityNameSearched + "Table border px-4 py-2 text-gray-600 hover:text-white hover:shadow-sm></td>");
-      $("." + cityNameSearched + "Table").append("<button class='ml-2 p-2'></button>");
+      $("." + cityNameSearched + "Saved").append("<td class=" + cityNameSearched + "Table border px-4 py-2 text-gray-600></td>");
+      $("." + cityNameSearched + "Table").append("<button class='hover:text-white font-semibold ml-2 p-2'></button>");
       $("." + cityNameSearched + "Table").find("button").text(cityName);
     }
 

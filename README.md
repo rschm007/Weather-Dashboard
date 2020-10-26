@@ -17,20 +17,15 @@ To install this application you will need a text editor like Visual Studio Code.
 Summary
 -----------------------------
 
-The user is presented with a page containing a header with  the current date, a "clear all text" button, and then a series of labeled rows.
-<img src="https://raw.githubusercontent.com/rschm007/Day-Planner/Assets/Demo%Images/demo-1.png" alt="Day Planner Demo Image" style="max-width:100%;">
+The user is presented with a mostly blank page containing only a search form.
+<img src="https://github.com/rschm007/Weather-Dashboard/blob/main/Assets/Demo%20Images/demo-1.png?raw=true" alt="Weather Dashboard Demo Image" style="max-width:100%;">
 
-The user is able to enter in their own text within each row.
-<img src="https://raw.githubusercontent.com/rschm007/Day-Planner/main/Assets/Demo%20Images/demo-2.png" alt="Day Planner Demo Image" style="max-width:100%;">
 
-Upon clicking the save button, the user's input is saved in localStorage and will persist through page resets.
-<img src="https://raw.githubusercontent.com/rschm007/Day-Planner/main/Assets/Demo%20Images/demo-3.png" alt="Day Planner Demo Image" style="max-width:100%;">
+Once the user enters a valid search term and presses enter (or clicks the search button), the page is populated with present forecast data and a 5-day forecast. Data is presented along with icons to make the information easily readable. The search term is also saved in a table under the search form.
+<img src="https://github.com/rschm007/Weather-Dashboard/blob/main/Assets/Demo%20Images/demo-2.png?raw=true" alt="Weather Dashboard Demo Image" style="max-width:100%;">
 
-Should the user want to reset their text, they can click the "Clear All Text" button to clear the localStorage and the text field values. The fields will then reset to show that they are empty.
-<img src="https://raw.githubusercontent.com/rschm007/Day-Planner/main/Assets/Demo%20Images/demo-4.png" alt="Day Planner Demo Image" style="max-width:100%;">
-
-The rows will dynamically change color based upon what time it currently is. Grey marks the past, red the present, and green the future.
-<img src="https://raw.githubusercontent.com/rschm007/Day-Planner/main/Assets/Demo%20Images/demo-5.png" alt="Day Planner Demo Image" style="max-width:100%;">
+If the user enters a new search term, the page is populated with weather data relevant to that city. The previous search terms persist in the table. The user has the option to click the table buttons, which will render the page with that city's forecast data.
+<img src="https://github.com/rschm007/Weather-Dashboard/blob/main/Assets/Demo%20Images/demo-3.png?raw=true" alt="Weather Dashboard Demo Image" style="max-width:100%;">
 
 Authors
 -----------------------------

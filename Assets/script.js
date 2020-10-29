@@ -8,6 +8,19 @@ $(document).ready(function () {
   // constant for now moment
   const now = moment().format("LL");
 
+  // get localstorage values to populate the DOM with what we've already searched
+  function populateHistory() {
+    let searchHistory = localStorage.getItem("search history");
+    if (searchHistory === null) {
+      return;
+    } else {
+      let cityName = searchHistory[0];
+      return cityName;
+    }
+  };
+
+  populateHistory();
+
   // if the user hits enter in the search form, click the search button
   $(".search").keypress(function (event) {
     if (event.keyCode === 13) {
@@ -22,6 +35,15 @@ $(document).ready(function () {
 
     // get the value of the search form from the user
     cityName = $(".search").val();
+
+    // push value of cityName into searchHistory array
+    cityNameString = JSON.stringify(cityName);
+    console.log(cityNameString)
+    if (searchHistory.includes(cityNameString) === false)
+      searchHistory.push(cityNameString);
+    console.log("Array: " + searchHistory);
+    // add localstorage functionality
+    localStorage.setItem("search history", searchHistory);
 
     // call the populateDOM function
     populateDOM();
@@ -316,17 +338,5 @@ $(document).ready(function () {
         });
       });
     }
-
-    // add another event listener for the search button
-    $(".searchBtn").on("click", function () {
-      cityName = $(".search").val();
-
-      // push value of cityName into searchHistory array
-      if (searchHistory.includes(cityName) === false)
-        searchHistory.push(cityName);
-      console.log("Array: " + searchHistory);
-      // add localstorage functionality
-      localStorage.setItem("search history", searchHistory);
-    });
   });
 });

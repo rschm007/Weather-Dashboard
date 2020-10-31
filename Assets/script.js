@@ -16,7 +16,7 @@ $(document).ready(function () {
     if (searchHistory === null) {
       return;
     } else {
-      cityNameSaved = JSON.stringify(searchHistory[0]);
+      cityNameSaved = (searchHistory[0]);
       return cityNameSaved;
     }
   }

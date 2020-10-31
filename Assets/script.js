@@ -5,6 +5,10 @@ var cityName;
 
 var cityNameSaved;
 
+// API settings
+const API = "876faa7d5be6244a6c4e363606e24ecc";
+const queryURL = "https:/api.openweathermap.org/data/2.5/weather?q=";
+
 $(document).ready(function () {
   // constant for now moment
   const now = moment().format("LL");
@@ -16,15 +20,15 @@ $(document).ready(function () {
     if (searchHistory === null) {
       return;
     } else {
-      cityNameSaved = (searchHistory[0]);
+      cityNameSaved = searchHistory[0];
       return cityNameSaved;
     }
   }
 
-
-
   // populateDOM function stores all DOM insertion functionality
   function populateDOM() {
+    // make all DOM elements visible
+    $(".invisible").addClass("visible").removeClass("invisible");
     // if there's any forecast cards, empty the cards first
     if (
       $(".dayOne").length >= 1 &&
@@ -42,20 +46,16 @@ $(document).ready(function () {
 
     if (typeof cityNameSaved !== "undefined") {
       // if there is a saved city value
-      const API = "876faa7d5be6244a6c4e363606e24ecc";
       var queryURLWeather =
         "https:/api.openweathermap.org/data/2.5/weather?q=" +
         cityNameSaved +
-        "&appid=876faa7d5be6244a6c4e363606e24ecc";
+        "&appid=" +
+        API;
       console.log("query is from saved");
       console.log(queryURLWeather);
     } else {
       // if there isn't a saved city value
-      const API = "876faa7d5be6244a6c4e363606e24ecc";
-      var queryURLWeather =
-        "https:/api.openweathermap.org/data/2.5/weather?q=" +
-        cityName +
-        "&appid=876faa7d5be6244a6c4e363606e24ecc";
+      var queryURLWeather = queryURL + cityName + "&appid=" + API;
       console.log("query is not from saved");
       console.log(queryURLWeather);
     }
@@ -66,7 +66,10 @@ $(document).ready(function () {
       method: "GET",
     }).then(function (response) {
       // add location and date to header DOM
-      $(".location").text(cityName);
+      if (typeof cityNameSaved !== "undefined") {
+        $(".location").text(cityNameSaved);
+      } else {
+      }
 
       // insert date into DOM
       $(".currentDate").text(" (" + now + ")");
@@ -184,10 +187,17 @@ $(document).ready(function () {
         }
         uvIndexSeverity(uvIndexValue);
       });
-      var queryForecast =
-        "https:/api.openweathermap.org/data/2.5/forecast?q=" +
-        cityName +
-        "&appid=876faa7d5be6244a6c4e363606e24ecc";
+      if (typeof cityNameSaved !== "undefined") {
+        var queryForecast =
+          "https:/api.openweathermap.org/data/2.5/forecast?q=" +
+          cityNameSaved +
+          "&appid=876faa7d5be6244a6c4e363606e24ecc";
+      } else {
+        var queryForecast =
+          "https:/api.openweathermap.org/data/2.5/forecast?q=" +
+          cityName +
+          "&appid=876faa7d5be6244a6c4e363606e24ecc";
+      }
 
       // define a function that will take care of appending the DOM with the forecast cards
       function forecastCards(
@@ -289,8 +299,8 @@ $(document).ready(function () {
   }
 
   init();
-  populateDOM();
   console.log("Saved city is: " + cityNameSaved);
+  populateDOM();
 
   // if the user hits enter in the search form, click the search button
   $(".search").keypress(function (event) {
@@ -304,11 +314,9 @@ $(document).ready(function () {
   $(".searchBtn").on("click", function (event) {
     event.preventDefault();
 
-
     // get the value of the search form from the user, then empty it
     cityName = $(".search").val();
     $(".search").val("");
-
 
     // push value of cityName into searchHistory array
     if (searchHistory.includes(cityName) === false)

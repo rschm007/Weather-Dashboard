@@ -8,6 +8,10 @@ var cityNameSaved;
 // declaring a var to hold if the user has searched. We will later use this to stop the DOM from being populated by saved searches
 var userHasSearched = false;
 
+// vars to hold the values of the table buttons
+var searchHistoryVar;
+var searchHistoryHTML;
+
 // API settings
 const API = "876faa7d5be6244a6c4e363606e24ecc";
 const queryURL = "https:/api.openweathermap.org/data/2.5/weather?q=";
@@ -27,8 +31,8 @@ $(document).ready(function () {
       $(".invisible").addClass("visible").removeClass("invisible");
       // insert contents of searchHistory array into table rows
       for (var i = 0; i < searchHistory.length; i++) {
-        let searchHistoryVar = searchHistory[i]
-        let searchHistoryHTML = searchHistoryVar.replace(/\s/g, '\xa0')
+        searchHistoryVar = searchHistory[i]
+        searchHistoryHTML = searchHistoryVar.replace(/\s/g, '\xa0')
         $(".pastSearches").append(
           "<tr class='hover:bg-blue-500 " + searchHistoryHTML + "Saved'>"
         );
@@ -391,9 +395,11 @@ $(document).ready(function () {
     var cityButton = $("." + cityNameSearched + "Button");
 
     // add an event listener that listens for if the user clicks a button in the city table. if user clicks, the cityName should be the button value
-    $(cityButton).on("click", function () {
-      cityName = $(this).text();
-      populateDOM();
+    $("button").on("click", function () {
+      if ($("button").text()) {
+        cityName = $(this).text();
+        populateDOM();
+      }
     });
   });
 });

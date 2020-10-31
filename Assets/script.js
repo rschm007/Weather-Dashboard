@@ -19,25 +19,43 @@ $(document).ready(function () {
   // get localstorage values to populate the DOM with what we've already searched
   function init() {
     let searchHistory = JSON.parse(localStorage.getItem("searchHistory"));
-    console.log("Search History: " + searchHistory);
     if (searchHistory === null) {
       return;
     } else {
       // make all DOM elements visible if there is a search history
       cityNameSaved = searchHistory[searchHistory.length - 1];
       $(".invisible").addClass("visible").removeClass("invisible");
+      // insert contents of searchHistory array into table rows
+      for (var i = 0; i < searchHistory.length; i++) {
+        let searchHistoryVar = searchHistory[i]
+        let searchHistoryHTML = searchHistoryVar.replace(/\s/g, '\xa0')
+        $(".pastSearches").append(
+          "<tr class='hover:bg-blue-500 " + searchHistoryHTML + "Saved'>"
+        );
+        $("." + searchHistoryHTML + "Saved").append(
+          "<td class=" +
+          searchHistoryHTML +
+            "Table border px-4 py-2 text-gray-600></td>"
+        );
+        $("." + searchHistoryHTML + "Table").append(
+          "<button class='" +
+          searchHistoryHTML +
+            "Button hover:text-white font-semibold ml-2 p-2'></button>"
+        );
+        $("." + searchHistoryHTML + "Table")
+          .find("button")
+          .text(searchHistoryHTML);
+      }
       return cityNameSaved;
     }
   }
 
   // populateDOM function stores all DOM insertion functionality
   function populateDOM() {
-
     // if cityName exists and the cards are still invisible, remove that invisible class
     if (cityName !== undefined && cityName !== null) {
       $(".invisible").removeClass("invisible");
     }
-
 
     // if there's any forecast cards, empty the cards first
     if (
@@ -54,7 +72,7 @@ $(document).ready(function () {
       $(".dayFive").empty();
     }
 
-    if ((typeof cityNameSaved !== "undefined") && (userHasSearched === false)) {
+    if (typeof cityNameSaved !== "undefined" && userHasSearched === false) {
       // if there is a saved city value
       var queryURLWeather =
         "https:/api.openweathermap.org/data/2.5/weather?q=" +
@@ -76,7 +94,7 @@ $(document).ready(function () {
       method: "GET",
     }).then(function (response) {
       // add location and date to header DOM
-      if ((typeof cityNameSaved !== "undefined") && (userHasSearched === false)) {
+      if (typeof cityNameSaved !== "undefined" && userHasSearched === false) {
         $(".location").text(cityNameSaved);
       } else {
         $(".location").text(cityName);
@@ -198,7 +216,7 @@ $(document).ready(function () {
         }
         uvIndexSeverity(uvIndexValue);
       });
-      if ((typeof cityNameSaved !== "undefined") && (userHasSearched === false)) {
+      if (typeof cityNameSaved !== "undefined" && userHasSearched === false) {
         var queryForecast =
           "https:/api.openweathermap.org/data/2.5/forecast?q=" +
           cityNameSaved +

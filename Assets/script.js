@@ -16,11 +16,12 @@ $(document).ready(function () {
     if (searchHistory === null) {
       return;
     } else {
-      cityNameSaved = searchHistory[0];
-      console.log("Saved city is: " + cityNameSaved);
-      populateDOM();
+      cityNameSaved = JSON.stringify(searchHistory[0]);
+      return cityNameSaved;
     }
   }
+
+
 
   // populateDOM function stores all DOM insertion functionality
   function populateDOM() {
@@ -288,6 +289,8 @@ $(document).ready(function () {
   }
 
   init();
+  populateDOM();
+  console.log("Saved city is: " + cityNameSaved);
 
   // if the user hits enter in the search form, click the search button
   $(".search").keypress(function (event) {
@@ -301,8 +304,11 @@ $(document).ready(function () {
   $(".searchBtn").on("click", function (event) {
     event.preventDefault();
 
-    // get the value of the search form from the user
+
+    // get the value of the search form from the user, then empty it
     cityName = $(".search").val();
+    $(".search").val("");
+
 
     // push value of cityName into searchHistory array
     if (searchHistory.includes(cityName) === false)

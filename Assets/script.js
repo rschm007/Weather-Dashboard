@@ -5,6 +5,9 @@ var cityName;
 
 var cityNameSaved;
 
+// declaring a var to hold if the user has searched. We will later use this to stop the DOM from being populated by saved searches
+var userHasSearched = false;
+
 // API settings
 const API = "876faa7d5be6244a6c4e363606e24ecc";
 const queryURL = "https:/api.openweathermap.org/data/2.5/weather?q=";
@@ -44,7 +47,7 @@ $(document).ready(function () {
       $(".dayFive").empty();
     }
 
-    if (typeof cityNameSaved !== "undefined") {
+    if ((typeof cityNameSaved !== "undefined") && (userHasSearched === false)) {
       // if there is a saved city value
       var queryURLWeather =
         "https:/api.openweathermap.org/data/2.5/weather?q=" +
@@ -66,9 +69,10 @@ $(document).ready(function () {
       method: "GET",
     }).then(function (response) {
       // add location and date to header DOM
-      if (typeof cityNameSaved !== "undefined") {
+      if ((typeof cityNameSaved !== "undefined") && (userHasSearched === false)) {
         $(".location").text(cityNameSaved);
       } else {
+        $(".location").text(cityName);
       }
 
       // insert date into DOM
@@ -187,7 +191,7 @@ $(document).ready(function () {
         }
         uvIndexSeverity(uvIndexValue);
       });
-      if (typeof cityNameSaved !== "undefined") {
+      if ((typeof cityNameSaved !== "undefined") && (userHasSearched === false)) {
         var queryForecast =
           "https:/api.openweathermap.org/data/2.5/forecast?q=" +
           cityNameSaved +
@@ -314,6 +318,9 @@ $(document).ready(function () {
   $(".searchBtn").on("click", function (event) {
     event.preventDefault();
 
+    // declare that the user has searched
+    userHasSearched = true;
+
     // get the value of the search form from the user, then empty it
     cityName = $(".search").val();
     $(".search").val("");
@@ -327,9 +334,6 @@ $(document).ready(function () {
 
     // call the populateDOM function
     populateDOM();
-
-    // make all DOM elements visible
-    $(".invisible").addClass("visible").removeClass("invisible");
 
     // save last search term as prepended table row in the pastSearches table so we can remove all spaces for class designations
     var cityNameSearched = cityName.replace(/\s+/g, "");

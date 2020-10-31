@@ -390,16 +390,16 @@ $(document).ready(function () {
         .find("button")
         .text(cityName);
     }
-
-    // define a variable that listens for a button click
-    var cityButton = $("." + cityNameSearched + "Button");
+    });
 
     // add an event listener that listens for if the user clicks a button in the city table. if user clicks, the cityName should be the button value
     $("button").on("click", function () {
       if ($("button").text()) {
         cityName = $(this).text();
+        userHasSearched = true;
+        console.log("table button has been pressed and it is " + cityName);
         populateDOM();
       }
-    });
+
   });
 });

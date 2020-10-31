@@ -23,17 +23,22 @@ $(document).ready(function () {
     if (searchHistory === null) {
       return;
     } else {
-      cityNameSaved = searchHistory[0];
+      // make all DOM elements visible if there is a search history
+      cityNameSaved = searchHistory[searchHistory.length - 1];
+      $(".invisible").addClass("visible").removeClass("invisible");
       return cityNameSaved;
     }
   }
 
   // populateDOM function stores all DOM insertion functionality
   function populateDOM() {
-    if  ((typeof cityNameSaved !== "undefined") && (userHasSearched === false)) {
-    // make all DOM elements visible if there is a search history
-    $(".invisible").addClass("visible").removeClass("invisible");
+
+    // if cityName exists and the cards are still invisible, remove that invisible class
+    if (cityName !== undefined && cityName !== null) {
+      $(".invisible").removeClass("invisible");
     }
+
+
     // if there's any forecast cards, empty the cards first
     if (
       $(".dayOne").length >= 1 &&

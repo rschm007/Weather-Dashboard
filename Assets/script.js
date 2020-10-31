@@ -30,8 +30,10 @@ $(document).ready(function () {
 
   // populateDOM function stores all DOM insertion functionality
   function populateDOM() {
-    // make all DOM elements visible
+    if  ((typeof cityNameSaved !== "undefined") && (userHasSearched === false)) {
+    // make all DOM elements visible if there is a search history
     $(".invisible").addClass("visible").removeClass("invisible");
+    }
     // if there's any forecast cards, empty the cards first
     if (
       $(".dayOne").length >= 1 &&

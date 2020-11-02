@@ -14,7 +14,7 @@ var searchHistoryHTML;
 
 // API settings
 const API = "876faa7d5be6244a6c4e363606e24ecc";
-const queryURL = "https:/api.openweathermap.org/data/2.5/weather?q=";
+const queryURL = "https://api.openweathermap.org/data/2.5/weather?q=";
 
 $(document).ready(function () {
   // constant for now moment
@@ -79,7 +79,7 @@ $(document).ready(function () {
     if (typeof cityNameSaved !== "undefined" && userHasSearched === false) {
       // if there is a saved city value
       var queryURLWeather =
-        "https:/api.openweathermap.org/data/2.5/weather?q=" +
+        "https://api.openweathermap.org/data/2.5/weather?q=" +
         cityNameSaved +
         "&appid=" +
         API;
@@ -222,12 +222,12 @@ $(document).ready(function () {
       });
       if (typeof cityNameSaved !== "undefined" && userHasSearched === false) {
         var queryForecast =
-          "https:/api.openweathermap.org/data/2.5/forecast?q=" +
+          "https://api.openweathermap.org/data/2.5/forecast?q=" +
           cityNameSaved +
           "&appid=876faa7d5be6244a6c4e363606e24ecc";
       } else {
         var queryForecast =
-          "https:/api.openweathermap.org/data/2.5/forecast?q=" +
+          "https://api.openweathermap.org/data/2.5/forecast?q=" +
           cityName +
           "&appid=876faa7d5be6244a6c4e363606e24ecc";
       }

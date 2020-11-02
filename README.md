@@ -11,7 +11,7 @@ The project has been deployed to GitHub pages. To use the app you can follow the
 Prerequisites
 -----------------------------
 
-To install this application you will need a text editor like Visual Studio Code. You will also need to install the Moment.js library (https://momentjs.com/) and the openweather API (https://openweathermap.org/)
+To install this application you will need a text editor like Visual Studio Code. You will also need to install the Moment.js library (https://momentjs.com/) , openweather API (https://openweathermap.org/), and Tailwind CSS (https://tailwindcss.com/).
 
 
 Summary

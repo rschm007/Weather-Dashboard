@@ -39,3 +39,5 @@ Authors
 Acknowledgements
 -----------------------------
 • UC Irvine Web Development program for providing project requirements and code examples
+• Nick Graffis (https://github.com/nickgraffis) and my TA Chad Tao for providing debugging assistance
+

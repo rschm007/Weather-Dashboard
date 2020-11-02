@@ -11,7 +11,7 @@ The project has been deployed to GitHub pages. To use the app you can follow the
 Prerequisites
 -----------------------------
 
-To install this application you will need a text editor like Visual Studio Code. You will also need to install the Moment.js library (https://momentjs.com/) and the openweather API (https://openweathermap.org/)
+To install this application you will need a text editor like Visual Studio Code. You will also need to install the Moment.js library (https://momentjs.com/) , openweather API (https://openweathermap.org/), and Tailwind CSS (https://tailwindcss.com/).
 
 
 Summary
@@ -26,6 +26,8 @@ Once the user enters a valid search term and presses enter (or clicks the search
 
 If the user enters a new search term, the page is populated with weather data relevant to that city. The previous search terms persist in the table. The user has the option to click the table buttons, which will render the page with that city's forecast data.
 <img src="https://github.com/rschm007/Weather-Dashboard/blob/main/Assets/Demo%20Images/demo-3.png?raw=true" alt="Weather Dashboard Demo Image" style="max-width:100%;">
+
+Finally, upon refreshing the page, the page is populated with the contents of the last search query.
 
 Authors
 -----------------------------

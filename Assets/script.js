@@ -31,20 +31,20 @@ $(document).ready(function () {
       $(".invisible").addClass("visible").removeClass("invisible");
       // insert contents of searchHistory array into table rows
       for (var i = 0; i < searchHistory.length; i++) {
-        searchHistoryVar = searchHistory[i]
-        searchHistoryHTML = searchHistoryVar.replace(/\s/g, '\xa0')
+        searchHistoryVar = searchHistory[i];
+        searchHistoryHTML = searchHistoryVar.replace(/\s/g, "\xa0");
         $(".pastSearches").append(
           "<tr class='hover:bg-blue-500 " + searchHistoryHTML + "Saved'>"
         );
         $("." + searchHistoryHTML + "Saved").append(
           "<td class=" +
-          searchHistoryHTML +
+            searchHistoryHTML +
             "Table border px-4 py-2 text-gray-600></td>"
         );
         $("." + searchHistoryHTML + "Table").append(
           "<button class='" +
-          searchHistoryHTML +
-            "Button hover:text-white font-semibold ml-2 p-2'></button>"
+            searchHistoryHTML +
+            "Button hover:text-white font-semibold ml-2 p-2 tableButton'></button>"
         );
         $("." + searchHistoryHTML + "Table")
           .find("button")
@@ -332,7 +332,6 @@ $(document).ready(function () {
   }
 
   init();
-  console.log("Saved city is: " + cityNameSaved);
   populateDOM();
 
   // if the user hits enter in the search form, click the search button
@@ -354,12 +353,19 @@ $(document).ready(function () {
     cityName = $(".search").val();
     $(".search").val("");
 
+    // if the user searched an empty string, end function
+    if (cityName === "") {
+      return;
+    }
+
     // push value of cityName into searchHistory array
     if (searchHistory.includes(cityName) === false)
       searchHistory.push(cityName);
-    // add localstorage functionality
-    let cityNameArrayStringified = JSON.stringify(searchHistory);
-    localStorage.setItem("searchHistory", cityNameArrayStringified);
+    // stringify searchHistory and only push it into localstorage if it is a valid string
+    if (cityName !== "") {
+      let cityNameArrayStringified = JSON.stringify(searchHistory);
+      localStorage.setItem("searchHistory", cityNameArrayStringified);
+    }
 
     // call the populateDOM function
     populateDOM();
@@ -384,22 +390,20 @@ $(document).ready(function () {
       $("." + cityNameSearched + "Table").append(
         "<button class='" +
           cityNameSearched +
-          "Button hover:text-white font-semibold ml-2 p-2'></button>"
+          "Button hover:text-white font-semibold ml-2 p-2 tableButton'></button>"
       );
       $("." + cityNameSearched + "Table")
         .find("button")
         .text(cityName);
     }
-    });
+  });
 
-    // add an event listener that listens for if the user clicks a button in the city table. if user clicks, the cityName should be the button value
-    $("button").on("click", function () {
-      if ($("button").text()) {
-        cityName = $(this).text();
-        userHasSearched = true;
-        console.log("table button has been pressed and it is " + cityName);
-        populateDOM();
-      }
-
+  // add an event listener that listens for if the user clicks a button in the city table. if user clicks, the cityName should be the button value
+  $(".tableButton").on("click", function () {
+    buttonText = $(this).text();
+    cityName = buttonText.replace(/\s/g, " ");
+    userHasSearched = true;
+    console.log("table button has been pressed and it is " + buttonText);
+    populateDOM();
   });
 });

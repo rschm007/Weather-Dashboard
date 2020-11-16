@@ -1,5 +1,8 @@
 Weather Dashboard
 -----------------------------
+![Badge for GitHub repo top language](https://img.shields.io/github/languages/top/rschm007/Readme_Generator?style=flat&logo=appveyor) ![Badge for GitHub last commit](https://img.shields.io/github/last-commit/rschm007/Readme_Generator?style=flat&logo=appveyor)
+  
+Check out the badges hosted by [shields.io](https://shields.io/).
 
 This webapp was designed as part of the UCI Web Development Bootcamp.
 
